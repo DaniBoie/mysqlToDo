@@ -7,4 +7,5 @@ module.exports = mysql.createConnection({
   database: 'todo_db'
 })
 
+module.exports = mysql.createConnection(process.env.JAWSDB_URL || 'mysql://root:-Fisher3385-@localhost/todo_db')
 
