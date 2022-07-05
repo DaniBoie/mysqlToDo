@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS todo_db;
+-- DROP DATABASE IF EXISTS todo_db;
 
 CREATE DATABASE todo_db;
 
@@ -7,4 +7,6 @@ USE todo_db;
 CREATE TABLE items(
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     text VARCHAR(50) NOT NULL,
-    is_done BOOLEAN NOT NULL
+    is_done BOOLEAN NOT NULL,
+    test_var BOOLEAN
+)

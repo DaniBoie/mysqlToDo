@@ -4,3 +4,12 @@
 .notDone{
   color: red;
 }
+
+h1 {
+  color: black;
+  border: 2px solid black;
+}
+
+#addItem {
+  color: red;
+}
