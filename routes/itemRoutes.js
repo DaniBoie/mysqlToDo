@@ -3,7 +3,7 @@ const db = require('../config')
 
 // GET all items
 router.get('/items', (req, res) => {
-  db.query('SELECT * FROM items', (err, items) => {
+  db.query('SELECT * FROM items ORDER BY is_done', (err, items) => {
     if (err) { console.log(err) }
     res.json(items)
   })

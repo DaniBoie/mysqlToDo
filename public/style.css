@@ -1,15 +1,47 @@
 .isDone{
-  color:blue;
+  color:#198754;
 }
-.notDone{
-  color: red;
+.notDone {
+  color: #dc3545;
+}
+
+.itemEntry {
+  text-align: center;
+}
+
+.listItem {
+  margin: 5px;
+}
+
+
+body {
+  padding: 5%;
+
+}
+
+* {
+  font-family: Helvetica;
 }
 
 h1 {
   color: black;
-  border: 2px solid black;
+  text-align: center;
 }
 
-#addItem {
-  color: red;
+#text {
+  display: inline-block;
+}
+
+#addItem{
+  width: 80%;
+}
+
+.itemText {
+  text-align: center;
+  font-size: larger;
+}
+
+.finish, .delete {
+  width: 45%;
+
 }

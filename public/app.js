@@ -9,15 +9,21 @@ function loadItems () {
       data.forEach(item => {
         const id = item.id
         const itemElem = document.createElement('div')
+        itemElem.className = 'card'
+        itemElem.classList.add('listItem')
         if (item.is_done === 0) {
           itemElem.classList.add('notDone')
         } else {
           itemElem.classList.add('isDone')
         }
         itemElem.innerHTML = `
-        <p id='text'>${item.text}</p>
-        <button class="finish" id='${id}'>Finish</button>
-        <button class="delete" id='${id}'>Delete</button>
+        <div class='row card-body'>
+          <p id='text' class='col itemText'>${item.text}</p>
+          <div class='col'>
+            <button class="finish btn btn-success" id='${id}'>Finish</button>
+            <button class="delete btn btn-danger" id='${id}'>Delete</button>
+          </div>
+        </div>
         `
         document.getElementById('notes').append(itemElem)
       })
@@ -32,7 +38,7 @@ document.getElementById('addItem').addEventListener('click', (event) => {
   axios.post('/api/items', { text: `${item}`, is_done: false })
     .then(({ data }) => {
       document.getElementById('text').value = ''
-      alert('Success!')
+      // alert('Success!')
     })
     .catch(err => console.log(err))
   loadItems()
@@ -40,24 +46,25 @@ document.getElementById('addItem').addEventListener('click', (event) => {
 
 document.addEventListener('click', (event) => {
   event.preventDefault()
-  if (event.target.className === 'finish') {
-    if (event.target.parentNode.className === 'isDone') {
-      event.target.parentNode.classList.remove('isDone')
-      event.target.parentNode.classList.add('notDone')
+  if (event.target.classList.contains('finish')) {
+    console.log('HIT!')
+    if (event.target.parentNode.parentNode.parentNode.classList.contains('isDone')) {
+      event.target.parentNode.parentNode.parentNode.classList.remove('isDone')
+      event.target.parentNode.parentNode.parentNode.classList.add('notDone')
       axios.put(`/api/items/${event.target.id}`, { is_done: false })
-        .then(console.log('Updated to isDone!'))
+        .then(console.log('Updated to notDone!'))
         .catch(err => console.log(err))
     } else {
-      event.target.parentNode.classList.remove('notDone')
-      event.target.parentNode.classList.add('isDone')
+      event.target.parentNode.parentNode.classList.remove('notDone')
+      event.target.parentNode.parentNode.classList.add('isDone')
       axios.put(`/api/items/${event.target.id}`, { is_done: true })
         .then(console.log('Updated to isDone!'))
         .catch(err => console.log(err))
     }
-  } else if (event.target.className === 'delete') {
+  } else if (event.target.classList.contains('delete')) {
     axios.delete(`/api/items/${event.target.id}`)
       .then(() => {
-        event.target.parentNode.remove()
+        event.target.parentNode.parentNode.remove()
       })
       .catch(err => { console.log(err) })
   }
